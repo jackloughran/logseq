@@ -24,15 +24,14 @@
 (def website
   (if dev?
     "http://localhost:3000"
-    (util/format "https://%s.com" app-name)))
+    "http://localhost:8080"))
 
 (def api
   (if dev?
     "http://localhost:3000/api/v1/"
     (str website "/api/v1/")))
 
-(def asset-domain (util/format "https://asset.%s.com"
-                               app-name))
+(def asset-domain "http://localhost:8080")
 
 ;; TODO: Remove this, switch to lazy loader
 (defn asset-uri
@@ -46,7 +45,7 @@
 
     :else
     (if dev? path
-        (str asset-domain path))))
+        (str asset-domain (string/replace path "/static/" "/")))))
 
 (goog-define GITHUB_APP_NAME "logseq-test")
 
